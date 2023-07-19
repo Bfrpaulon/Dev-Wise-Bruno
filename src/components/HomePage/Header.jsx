@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText, Drawer, Hidden } from '@material-ui/core';
 import { Home, Description, WbIncandescent, Info, Mail, Menu as MenuIcon } from '@material-ui/icons';
+import { useSpring, animated } from 'react-spring';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -30,12 +31,20 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       marginTop: '1rem',
     },
+    
+  },
+  drawer: {
+    background: '#EEE3D7', // --bg-200
+    width: '240px',
   },
 }));
 
 const Header = () => {
   const classes = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const drawerAnimation = useSpring({
+    transform: isDrawerOpen ? 'translateX(0)' : 'translateX(-100%)',
+  });
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -52,32 +61,34 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-            <List>
-              <ListItem button component={Link} to="/">
-                <ListItemIcon><Home /></ListItemIcon>
-                <ListItemText primary="Início" />
-              </ListItem>
-              <ListItem button component={Link} to="/articles">
-                <ListItemIcon><Description /></ListItemIcon>
-                <ListItemText primary="Artigos" />
-              </ListItem>
-              <ListItem button component={Link} to="/tutorials">
-                <ListItemIcon><Home /></ListItemIcon>
-                <ListItemText primary="Tutoriais" />
-              </ListItem>
-              <ListItem button component={Link} to="/tips">
-                <ListItemIcon><WbIncandescent /></ListItemIcon>
-                <ListItemText primary="Dicas" />
-              </ListItem>
-              <ListItem button component={Link} to="/about">
-                <ListItemIcon><Info /></ListItemIcon>
-                <ListItemText primary="Sobre" />
-              </ListItem>
-              <ListItem button component={Link} to="/contact">
-                <ListItemIcon><Mail /></ListItemIcon>
-                <ListItemText primary="Contato" />
-              </ListItem>
-            </List>
+            <animated.div style={drawerAnimation}>
+              <List className={classes.drawer}>
+                <ListItem button component={Link} to="/">
+                  <ListItemIcon><Home /></ListItemIcon>
+                  <ListItemText primary="Início" />
+                </ListItem>
+                <ListItem button component={Link} to="/articles">
+                  <ListItemIcon><Description /></ListItemIcon>
+                  <ListItemText primary="Artigos" />
+                </ListItem>
+                <ListItem button component={Link} to="/tutorials">
+                  <ListItemIcon><Home /></ListItemIcon>
+                  <ListItemText primary="Tutoriais" />
+                </ListItem>
+                <ListItem button component={Link} to="/tips">
+                  <ListItemIcon><WbIncandescent /></ListItemIcon>
+                  <ListItemText primary="Dicas" />
+                </ListItem>
+                <ListItem button component={Link} to="/about">
+                  <ListItemIcon><Info /></ListItemIcon>
+                  <ListItemText primary="Sobre" />
+                </ListItem>
+                <ListItem button component={Link} to="/contact">
+                  <ListItemIcon><Mail /></ListItemIcon>
+                  <ListItemText primary="Contato" />
+                </ListItem>
+              </List>
+            </animated.div>
           </Drawer>
         </Hidden>
         <Hidden xsDown>
