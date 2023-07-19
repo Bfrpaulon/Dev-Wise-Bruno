@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText, Drawer, Hidden } from '@material-ui/core';
 import { Home, Description, WbIncandescent, Info, Mail, Menu as MenuIcon } from '@material-ui/icons';
 import { useSpring, animated } from 'react-spring';
-
+import logo from '../../assets/images/logo.svg'; 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: '#BFAE9F', // --primary-100
+    background: '#005B99', // --primary-100
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
   },
   toolbar: {
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   logo: {
-    color: '#4D4D4D', // --text-100
+    color: '#333333', // --text-100
     textDecoration: 'none',
     marginRight: '2rem',
   },
   listItem: {
-    color: '#9e9e9e', // --text-200
+    color: '#5c5c5c', // --text-200
     marginLeft: '2rem',
   },
   navMenu: {
@@ -31,10 +31,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       marginTop: '1rem',
     },
-    
   },
   drawer: {
-    background: '#EEE3D7', // --bg-200
+    background: '#ebebeb', // --bg-200
     width: '240px',
   },
 }));
@@ -54,7 +53,7 @@ const Header = () => {
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Typography variant="h6" component={Link} to="/" className={classes.logo}>
-          DevWise
+        <img src={logo} alt="Logo" className={classes.logo} />
         </Typography>
         <Hidden smUp>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>
